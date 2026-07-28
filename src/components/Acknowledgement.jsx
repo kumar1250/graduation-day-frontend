@@ -64,7 +64,7 @@ const Acknowledgement = forwardRef(function Acknowledgement({ student }, ref) {
           {/* Title */}
           <div className="text-center mt-7">
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brass-600">
-              Graduation Day 2026 &middot; 8th April
+              Graduation Day 2026 &middot; 22nd August 2026
             </p>
             <h2 className="font-display text-2xl font-bold text-ink-950 mt-1.5">
               Registration Acknowledgement
@@ -176,7 +176,7 @@ const Acknowledgement = forwardRef(function Acknowledgement({ student }, ref) {
                 Congratulations, and welcome to the alumni family.
               </p>
               <p className="text-[11px] text-ink-900/45 mt-1">
-                Graduation Day Office &middot; BVCE Group of Institutions
+                Graduation Day Office &middot; BVCE College &middot; Amalapuram &middot; Odalarevu
               </p>
             </div>
             <div className="text-center shrink-0">

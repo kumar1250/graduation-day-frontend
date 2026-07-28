@@ -7,7 +7,7 @@ import AcknowledgementSection from "../components/AcknowledgementSection";
 const DETAILS = [
   {
     label: "Date",
-    value: "8th April, 2026",
+    value: "22nd August, 2026",
     icon: (
       <path d="M7 3v3M17 3v3M4 9h16M5.5 5h13A1.5 1.5 0 0 1 20 6.5v13A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5v-13A1.5 1.5 0 0 1 5.5 5Z" />
     ),
@@ -21,7 +21,7 @@ const DETAILS = [
   },
   {
     label: "Eligible Batch",
-    value: "2022 Batch — PC Eligible List",
+    value: "2022-2026 Batch — PC Eligible List",
     icon: (
       <path d="M12 3 2 8l10 5 10-5-10-5Zm-7 8.5V16c0 1.5 3 3.5 7 3.5s7-2 7-3.5v-4.5M22 8v6" />
     ),
