@@ -4,6 +4,14 @@ import heroImg from "../assets/hero.png";
 import RegisterSection from "../components/RegisterSection";
 import AcknowledgementSection from "../components/AcknowledgementSection";
 
+// These four are original illustrations (not real photos) so the gallery
+// looks finished today. Swap any of them for a real campus/ceremony photo
+// whenever you have one — just point the import at a .jpg/.png instead.
+import galleryCampus from "../assets/gallery-campus.jpg";
+import galleryStage from "../assets/gallery-stage.svg";
+import galleryCap from "../assets/gallery-cap.svg";
+import galleryFriends from "../assets/gallery-friends.svg";
+
 const DETAILS = [
   {
     label: "Date",
@@ -46,6 +54,15 @@ const STEPS = [
   },
 ];
 
+// Swap these captions/images for whatever photos you drop into
+// src/assets — remove an entry entirely if you don't have that shot yet.
+const GALLERY = [
+  { src: galleryCampus, alt: "Illustration of the BVCE campus building", caption: "Our campus" },
+  { src: galleryStage, alt: "Illustration of the auditorium stage and podium", caption: "Center stage" },
+  { src: galleryCap, alt: "Illustration of a graduation cap and diploma", caption: "Caps up!" },
+  { src: galleryFriends, alt: "Illustration of graduates celebrating together", caption: "Class of 2022" },
+];
+
 function scrollToRegister() {
   const el = document.getElementById("register");
   if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -55,7 +72,7 @@ export default function Home() {
   const [registeredStudent, setRegisteredStudent] = useState(null);
 
   return (
-    <div className="min-h-screen bg-parchment-50">
+    <div className="min-h-screen bg-parchment-50 overflow-x-hidden">
       <div className="h-1.5 rule-brass" />
 
       <section className="relative overflow-hidden bg-ink-950 text-white">
@@ -67,31 +84,31 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink-950/95 via-ink-950/90 to-ink-950" />
 
-        <div className="relative max-w-5xl mx-auto px-6 pt-14 pb-16 md:pt-20 md:pb-24">
-          <div className="flex flex-col items-center text-center gap-6">
+        <div className="relative max-w-5xl mx-auto px-5 sm:px-6 pt-12 pb-14 md:pt-20 md:pb-24">
+          <div className="flex flex-col items-center text-center gap-5 md:gap-6">
             <img
               src={bvceLogo}
               alt="BVCE emblem"
-              className="w-24 h-24 md:w-28 md:h-28 drop-shadow-[0_4px_18px_rgba(201,162,39,0.35)]"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 drop-shadow-[0_4px_18px_rgba(201,162,39,0.35)]"
             />
 
             <div>
-              <p className="font-body uppercase tracking-[0.35em] text-brass-400 text-xs md:text-sm">
+              <p className="font-body uppercase tracking-[0.25em] sm:tracking-[0.35em] text-brass-400 text-[11px] sm:text-xs md:text-sm px-2">
                 Bonam Venkata Chalamayya Group of Institutions
               </p>
-              <p className="text-ink-100/60 text-xs mt-1.5 tracking-wide">
+              <p className="text-ink-100/60 text-[11px] sm:text-xs mt-1.5 tracking-wide px-2">
                 Amalapuram &middot; Odalarevu &middot; Rajahmundry — Since 1997
               </p>
             </div>
 
-            <h1 className="font-display font-bold text-4xl md:text-6xl leading-[1.08] max-w-3xl">
+            <h1 className="font-display font-bold text-[2.1rem] leading-[1.12] sm:text-4xl md:text-6xl md:leading-[1.08] max-w-3xl px-1">
               Graduation Day <span className="text-brass-400">2026</span>
             </h1>
-            <p className="font-script text-2xl md:text-3xl text-brass-300/90 -mt-2">
+            <p className="font-script text-xl sm:text-2xl md:text-3xl text-brass-300/90 -mt-1 md:-mt-2">
               Class of 2022 &mdash; a chapter closes, a legacy begins
             </p>
 
-            <p className="text-ink-100/70 max-w-xl text-sm md:text-base leading-relaxed">
+            <p className="text-ink-100/70 max-w-xl text-sm md:text-base leading-relaxed px-2">
               Register your attendance below to confirm your seat at the ceremony
               and receive your official acknowledgement, ready to download in
               seconds.
@@ -101,7 +118,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={scrollToRegister}
-                className="mt-2 group inline-flex items-center gap-2 bg-brass-500 hover:bg-brass-400 text-ink-950 font-semibold text-sm px-8 py-3.5 rounded-full shadow-[0_10px_30px_-8px_rgba(201,162,39,0.55)] transition"
+                className="mt-2 group inline-flex items-center justify-center gap-2 w-full max-w-xs sm:w-auto bg-brass-500 hover:bg-brass-400 active:bg-brass-400 text-ink-950 font-semibold text-sm px-8 py-3.5 rounded-full shadow-[0_10px_30px_-8px_rgba(201,162,39,0.55)] transition"
               >
                 Register for Graduation Day
                 <svg
@@ -112,7 +129,7 @@ export default function Home() {
                   stroke="currentColor"
                   strokeWidth="2.4"
                   strokeLinecap="round"
-                  className="transition group-hover:translate-x-0.5"
+                  className="transition group-hover:translate-x-0.5 shrink-0"
                 >
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
@@ -124,12 +141,12 @@ export default function Home() {
         <div className="h-px rule-brass opacity-70" />
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 -mt-8 md:-mt-10 relative z-10">
-        <div className="grid sm:grid-cols-3 gap-5">
+      <section className="max-w-5xl mx-auto px-5 sm:px-6 -mt-6 md:-mt-10 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
           {DETAILS.map((d) => (
             <div
               key={d.label}
-              className="bg-white rounded-2xl shadow-[0_18px_40px_-24px_rgba(14,33,68,0.35)] border border-ink-900/5 px-6 py-6 flex items-center gap-4"
+              className="bg-white rounded-2xl shadow-[0_18px_40px_-24px_rgba(14,33,68,0.35)] border border-ink-900/5 px-5 py-5 md:px-6 md:py-6 flex items-center gap-4"
             >
               <div className="shrink-0 w-11 h-11 rounded-full bg-ink-900 flex items-center justify-center">
                 <svg
@@ -145,11 +162,11 @@ export default function Home() {
                   {d.icon}
                 </svg>
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-600/70">
                   {d.label}
                 </p>
-                <p className="text-ink-950 font-semibold text-sm mt-0.5">
+                <p className="text-ink-950 font-semibold text-sm mt-0.5 break-words">
                   {d.value}
                 </p>
               </div>
@@ -158,19 +175,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
-        <div className="text-center mb-10">
+      <section className="max-w-5xl mx-auto px-5 sm:px-6 pt-14 md:pt-16 pb-4">
+        <div className="text-center mb-8 md:mb-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass-600">
             Three simple steps
           </p>
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-ink-950 mt-2">
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink-950 mt-2">
             Getting registered takes a minute
           </h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8">
           {STEPS.map((s, i) => (
-            <div key={s.n} className="relative pl-14">
-              <span className="absolute left-0 top-0 font-display text-4xl font-bold text-ink-900/10">
+            <div key={s.n} className="relative pl-12 md:pl-14">
+              <span className="absolute left-0 top-0 font-display text-3xl md:text-4xl font-bold text-ink-900/10">
                 {s.n}
               </span>
               <h3 className="font-semibold text-ink-950">{s.title}</h3>
@@ -187,7 +204,43 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="register" className="px-6 pt-10 pb-20">
+      <section className="max-w-5xl mx-auto px-5 sm:px-6 pt-14 md:pt-16 pb-2">
+        <div className="text-center mb-8 md:mb-10">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass-600">
+            Moments to remember
+          </p>
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink-950 mt-2">
+            Life at BVCE
+          </h2>
+          <p className="text-ink-900/60 text-sm mt-3 max-w-md mx-auto leading-relaxed">
+            A look back at our campus and the convocations that came before this one.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {GALLERY.map((g) => (
+            <figure
+              key={g.caption}
+              className="group relative aspect-[3/4] rounded-xl md:rounded-2xl overflow-hidden bg-ink-900/5 shadow-[0_14px_30px_-20px_rgba(14,33,68,0.4)]"
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition duration-300 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/0 to-transparent" />
+              <figcaption className="absolute bottom-0 left-0 right-0 p-2.5 md:p-3">
+                <span className="text-white text-[11px] md:text-xs font-semibold tracking-wide">
+                  {g.caption}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section id="register" className="px-5 sm:px-6 pt-10 pb-16 md:pb-20">
         {registeredStudent ? (
           <AcknowledgementSection
             student={registeredStudent}
@@ -199,10 +252,10 @@ export default function Home() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass-600">
                 Registration
               </p>
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-ink-950 mt-2">
+              <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-ink-950 mt-2">
                 Confirm your attendance
               </h2>
-              <p className="text-ink-900/60 text-sm mt-3 leading-relaxed">
+              <p className="text-ink-900/60 text-sm mt-3 leading-relaxed px-2">
                 Enter your roll number to confirm your details and register your
                 attendance for Graduation Day. If you're already registered,
                 you can re-download your acknowledgement here too.
@@ -217,8 +270,8 @@ export default function Home() {
 
       <footer className="bg-ink-950 text-ink-100/60">
         <div className="h-px rule-brass opacity-70" />
-        <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-          <div className="flex items-center gap-3">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <img src={bvceLogo} alt="BVCE emblem" className="w-9 h-9 opacity-90" />
             <div>
               <p className="text-white font-semibold text-sm">

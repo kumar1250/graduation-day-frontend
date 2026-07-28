@@ -1,0 +1,48 @@
+<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="capBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#122747"/>
+      <stop offset="1" stop-color="#0B1E3D"/>
+    </linearGradient>
+    <radialGradient id="capGlow" cx="0.5" cy="0.38" r="0.42">
+      <stop offset="0" stop-color="#E3C567" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#E3C567" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="300" height="400" fill="url(#capBg)"/>
+  <circle cx="150" cy="150" r="130" fill="url(#capGlow)"/>
+
+  <!-- stars -->
+  <g fill="#E3C567" opacity="0.55">
+    <circle cx="52" cy="70" r="2.4"/>
+    <circle cx="240" cy="96" r="2"/>
+    <circle cx="70" cy="200" r="1.8"/>
+    <circle cx="230" cy="230" r="2.4"/>
+    <circle cx="40" cy="130" r="1.6"/>
+  </g>
+
+  <!-- mortarboard cap -->
+  <g>
+    <ellipse cx="150" cy="176" rx="14" ry="9" fill="#0B1E3D" stroke="#C9A227" stroke-width="2"/>
+    <polygon points="150,110 262,158 150,206 38,158" fill="#16294a" stroke="#C9A227" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="150,110 262,158 150,178 38,158" fill="#1b3157"/>
+    <line x1="150" y1="158" x2="150" y2="185" stroke="#C9A227" stroke-width="2"/>
+    <circle cx="150" cy="158" r="5" fill="#C9A227"/>
+    <path d="M150 158 C 172 172, 176 198, 168 224" fill="none" stroke="#C9A227" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M168 224 l -10 -4 l 2 12 z" fill="#C9A227"/>
+  </g>
+
+  <!-- diploma scroll -->
+  <g transform="translate(150,282)">
+    <rect x="-58" y="-14" width="116" height="28" rx="14" fill="#F4EBD3" stroke="#C9A227" stroke-width="2"/>
+    <circle cx="-58" cy="0" r="14" fill="#F4EBD3" stroke="#C9A227" stroke-width="2"/>
+    <circle cx="58" cy="0" r="14" fill="#F4EBD3" stroke="#C9A227" stroke-width="2"/>
+    <line x1="-40" y1="-4" x2="40" y2="-4" stroke="#0B1E3D" stroke-width="1.6" opacity="0.5"/>
+    <line x1="-40" y1="4" x2="40" y2="4" stroke="#0B1E3D" stroke-width="1.6" opacity="0.5"/>
+    <rect x="-4" y="-24" width="8" height="20" fill="#C9A227"/>
+    <path d="M-4 -4 L0 6 L4 -4 Z" fill="#C9A227"/>
+  </g>
+
+  <line x1="0" y1="392" x2="300" y2="392" stroke="#C9A227" stroke-width="2" opacity="0.7"/>
+</svg>
