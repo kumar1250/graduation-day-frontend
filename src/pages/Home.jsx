@@ -4,9 +4,9 @@ import heroImg from "../assets/hero.png";
 import RegisterSection from "../components/RegisterSection";
 import AcknowledgementSection from "../components/AcknowledgementSection";
 
-// These four are original illustrations (not real photos) so the gallery
-// looks finished today. Swap any of them for a real campus/ceremony photo
-// whenever you have one — just point the import at a .jpg/.png instead.
+// All four slots now use real campus/event photos. Swap any file below
+// for a different shot any time — just point the import at the new file
+// and update its tag/title/blurb to match what's actually in the photo.
 import galleryCampus from "../assets/gallery-campus.jpg";
 import galleryStage from "../assets/gallery-stage.jpeg";
 import galleryCap from "../assets/gallery-cap.jpeg";
@@ -58,14 +58,12 @@ const STEPS = [
   },
 ];
 
-// Swap these images/copy for whatever photos you drop into src/assets —
-// remove an entry entirely if you don't have that shot yet. The tag,
-// title, and blurb are placeholder copy about BVCE for each theme —
-// edit freely once you have the real details on hand.
+// Tag, title, and blurb are the caption copy shown over/under each photo —
+// edit freely to match what's actually happening in each shot.
 const GALLERY = [
   {
     src: galleryCampus,
-    alt: "Illustration of the BVCE campus building",
+    alt: "Photo of the BVCE campus building",
     tag: "Campus",
     tagColor: "bg-sky-600",
     title: "A campus built for the next chapter",
@@ -74,7 +72,7 @@ const GALLERY = [
   },
   {
     src: galleryStage,
-    alt: "Illustration of the auditorium stage and podium",
+    alt: "Photo of the auditorium stage and podium",
     tag: "Ceremony",
     tagColor: "bg-rose-500",
     title: "Center stage, one last time",
@@ -83,16 +81,16 @@ const GALLERY = [
   },
   {
     src: galleryCap,
-    alt: "Illustration of a graduation cap and diploma",
+    alt: "Students seated in a packed BVCE classroom during a seminar session",
     tag: "Academics",
     tagColor: "bg-emerald-600",
-    title: "Four years, one diploma",
+    title: "Classrooms that filled up fast",
     blurb:
-      "From core engineering to computer science and IT, BVCE's programs are built around hands-on labs, project work, and industry-facing coursework.",
+      "From orientation talks to guest seminars, BVCE's classrooms have hosted every batch — where core engineering meets computer science and IT through hands-on coursework and real project work.",
   },
   {
     src: galleryFriends,
-    alt: "Illustration of graduates celebrating together",
+    alt: "Photo of graduates celebrating together",
     tag: "Community",
     tagColor: "bg-amber-500",
     title: "A growing alumni family",
