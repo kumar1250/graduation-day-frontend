@@ -217,7 +217,7 @@ export default function Home() {
 
             <div className={heroStep(120)} style={heroStyle(120)}>
               <p className="font-body uppercase tracking-[0.25em] sm:tracking-[0.35em] text-brass-400 text-[11px] sm:text-xs md:text-sm px-2">
-                Bonam Venkata Chalamayya Group of Institutions
+                Bonam Venkata Chalamayya Engineering College Odalarevu
               </p>
               <p className="text-ink-100/60 text-[11px] sm:text-xs mt-1.5 tracking-wide px-2">
                 Amalapuram &middot; Odalarevu &middot; Rajahmundry — Since 1997
@@ -437,7 +437,7 @@ export default function Home() {
             <img src={bvceLogo} alt="BVCE emblem" className="w-9 h-9 opacity-90" />
             <div>
               <p className="text-white font-semibold text-sm">
-                Bonam Venkata Chalamayya Group of Institutions
+                Bonam Venkata Chalamayya Engineering College Odalarevu
               </p>
               <p className="text-xs mt-0.5">
                 Amalapuram &middot; Odalarevu &middot; Rajahmundry
