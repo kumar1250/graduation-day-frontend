@@ -1,4 +1,4 @@
-const API_BASE = "https://graduation-day-vert.vercel.app/api/";
+const API_BASE = "https://graduation-mbj4.onrender.com/api/";
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_BASE}${path}`, {
