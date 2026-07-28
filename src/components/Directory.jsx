@@ -32,32 +32,35 @@ export default function Directory() {
   };
 
   return (
-    <div className="space-y-4">
-      <form onSubmit={handleSearch} className="flex gap-3">
+    <div className="space-y-4 px-4 sm:px-0">
+      <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by roll number, name, or father name"
-          className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+          autoComplete="off"
+          className="flex-1 border border-slate-300 rounded-lg px-3 py-2.5 sm:py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
         />
-        <button
-          type="submit"
-          className="bg-slate-900 text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-slate-700"
-        >
-          Search
-        </button>
-        {search && (
+        <div className="flex gap-2.5 sm:gap-3">
           <button
-            type="button"
-            onClick={() => {
-              setSearch("");
-              load("");
-            }}
-            className="text-sm text-slate-500 hover:text-slate-800 px-2"
+            type="submit"
+            className="flex-1 sm:flex-none bg-slate-900 text-white text-sm font-medium px-5 py-2.5 sm:py-2 rounded-lg hover:bg-slate-700 transition"
           >
-            Clear
+            Search
           </button>
-        )}
+          {search && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                load("");
+              }}
+              className="text-sm text-slate-500 hover:text-slate-800 px-2 shrink-0"
+            >
+              Clear
+            </button>
+          )}
+        </div>
       </form>
 
       {error && (
@@ -66,38 +69,47 @@ export default function Directory() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-x-auto">
-        <div className="px-5 py-3 border-b border-slate-200 text-sm text-slate-500">
-          {loading ? "Loading..." : `${count} student${count === 1 ? "" : "s"}`}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="px-4 sm:px-5 py-3 border-b border-slate-200 text-sm text-slate-500">
+          {loading ? "Loading…" : `${count} student${count === 1 ? "" : "s"}`}
         </div>
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-slate-500 text-left">
-            <tr>
-              <th className="px-4 py-2 font-medium">Roll No</th>
-              <th className="px-4 py-2 font-medium">Name</th>
-              <th className="px-4 py-2 font-medium">Father Name</th>
-              <th className="px-4 py-2 font-medium">Class Awarded</th>
-              <th className="px-4 py-2 font-medium">CGPA</th>
-              <th className="px-4 py-2 font-medium">Month &amp; Year</th>
-              <th className="px-4 py-2 font-medium">Mobile</th>
-              <th className="px-4 py-2 font-medium">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((s) => (
-              <tr key={s.roll_no} className="border-t border-slate-100 hover:bg-slate-50">
-                <td className="px-4 py-2 font-medium text-slate-900">{s.roll_no}</td>
-                <td className="px-4 py-2">{s.name}</td>
-                <td className="px-4 py-2">{s.father_name}</td>
-                <td className="px-4 py-2">{s.class_awarded}</td>
-                <td className="px-4 py-2">{s.cgpa}</td>
-                <td className="px-4 py-2">{s.month_year}</td>
-                <td className="px-4 py-2">{s.mobile}</td>
-                <td className="px-4 py-2">{s.email}</td>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[860px] text-sm">
+            <thead className="bg-slate-50 text-slate-500 text-left">
+              <tr>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Roll No</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Name</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Father Name</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Class Awarded</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">CGPA</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Month &amp; Year</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Mobile</th>
+                <th className="px-4 py-2 font-medium whitespace-nowrap">Email</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {students.map((s) => (
+                <tr key={s.roll_no} className="border-t border-slate-100 hover:bg-slate-50">
+                  <td className="px-4 py-2 font-medium text-slate-900 whitespace-nowrap">
+                    {s.roll_no}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.name}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.father_name}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.class_awarded}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.cgpa}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.month_year}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.mobile}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{s.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!loading && students.length === 0 && (
+          <div className="px-4 sm:px-5 py-6 text-center text-sm text-slate-400">
+            No students found.
+          </div>
+        )}
       </div>
     </div>
   );

@@ -77,23 +77,26 @@ export default function StudentLookup() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 sm:space-y-6 px-4 sm:px-0">
+      {/* Search */}
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex gap-3"
+        className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-5 flex flex-col sm:flex-row gap-3"
       >
         <input
           value={rollNo}
           onChange={(e) => setRollNo(e.target.value)}
           placeholder="Enter roll number, e.g. 22221A0101"
-          className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+          autoComplete="off"
+          autoCapitalize="characters"
+          className="flex-1 border border-slate-300 rounded-lg px-3 py-2.5 sm:py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
         />
         <button
           type="submit"
-          disabled={loading}
-          className="bg-slate-900 text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-slate-700 disabled:opacity-50"
+          disabled={loading || !rollNo.trim()}
+          className="bg-slate-900 text-white text-sm font-medium px-5 py-2.5 sm:py-2 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition shrink-0"
         >
-          {loading ? "Searching..." : "Search"}
+          {loading ? "Searching…" : "Search"}
         </button>
       </form>
 
@@ -104,13 +107,16 @@ export default function StudentLookup() {
       )}
 
       {student && (
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-5">
           <h2 className="font-semibold text-slate-900 mb-3">Student Details</h2>
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
             {DETAIL_ROWS.map(([label, key]) => (
-              <div key={key} className="flex justify-between border-b border-slate-100 pb-1">
-                <dt className="text-slate-500">{label}</dt>
-                <dd className="font-medium text-slate-900 text-right">
+              <div
+                key={key}
+                className="flex justify-between gap-3 border-b border-slate-100 pb-1"
+              >
+                <dt className="text-slate-500 shrink-0">{label}</dt>
+                <dd className="font-medium text-slate-900 text-right break-words">
                   {student[key] ?? "—"}
                 </dd>
               </div>
@@ -124,16 +130,22 @@ export default function StudentLookup() {
           ) : (
             <form onSubmit={handleSubmit} className="mt-5 space-y-4 border-t border-slate-200 pt-4">
               <div>
-                <label className="text-sm font-medium text-slate-700">Will attend graduation day?</label>
+                <label className="text-sm font-medium text-slate-700">
+                  Will attend graduation day?
+                </label>
                 <div className="flex gap-4 mt-2">
                   {["Yes", "No"].map((opt) => (
-                    <label key={opt} className="flex items-center gap-2 text-sm">
+                    <label
+                      key={opt}
+                      className="flex items-center gap-2 text-sm cursor-pointer"
+                    >
                       <input
                         type="radio"
                         name="attend"
                         value={opt}
                         checked={attend === opt}
                         onChange={() => setAttend(opt)}
+                        className="accent-slate-900"
                       />
                       {opt}
                     </label>
@@ -143,38 +155,53 @@ export default function StudentLookup() {
 
               {attend === "Yes" && (
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-slate-700">Accompanying persons</label>
+                  <label className="text-sm font-medium text-slate-700">
+                    Accompanying persons
+                  </label>
+
                   {persons.map((p, idx) => (
-                    <div key={idx} className="flex gap-2 items-center">
-                      <input
-                        placeholder="Name"
-                        value={p.name}
-                        onChange={(e) => updatePerson(idx, "name", e.target.value)}
-                        className="flex-1 border border-slate-300 rounded-lg px-3 py-1.5 text-sm"
-                      />
-                      <input
-                        placeholder="Contact"
-                        value={p.contact}
-                        onChange={(e) => updatePerson(idx, "contact", e.target.value)}
-                        className="flex-1 border border-slate-300 rounded-lg px-3 py-1.5 text-sm"
-                      />
-                      <input
-                        placeholder="Relation"
-                        value={p.relation}
-                        onChange={(e) => updatePerson(idx, "relation", e.target.value)}
-                        className="flex-1 border border-slate-300 rounded-lg px-3 py-1.5 text-sm"
-                      />
-                      {persons.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removePerson(idx)}
-                          className="text-slate-400 hover:text-red-600 text-sm px-2"
-                        >
-                          ✕
-                        </button>
-                      )}
+                    <div
+                      key={idx}
+                      className="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-slate-500">
+                          Person {idx + 1}
+                        </span>
+                        {persons.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removePerson(idx)}
+                            className="text-slate-400 hover:text-red-600 text-xs font-medium px-1"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <input
+                          placeholder="Name"
+                          value={p.name}
+                          onChange={(e) => updatePerson(idx, "name", e.target.value)}
+                          className="border border-slate-300 rounded-lg px-3 py-2 sm:py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+                        />
+                        <input
+                          placeholder="Contact"
+                          value={p.contact}
+                          onChange={(e) => updatePerson(idx, "contact", e.target.value)}
+                          inputMode="tel"
+                          className="border border-slate-300 rounded-lg px-3 py-2 sm:py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+                        />
+                        <input
+                          placeholder="Relation"
+                          value={p.relation}
+                          onChange={(e) => updatePerson(idx, "relation", e.target.value)}
+                          className="border border-slate-300 rounded-lg px-3 py-2 sm:py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
+                        />
+                      </div>
                     </div>
                   ))}
+
                   <button
                     type="button"
                     onClick={addPerson}
@@ -188,15 +215,15 @@ export default function StudentLookup() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="bg-emerald-600 text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-emerald-700 disabled:opacity-50"
+                className="w-full sm:w-auto bg-emerald-600 text-white text-sm font-medium px-5 py-2.5 sm:py-2 rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
-                {submitting ? "Submitting..." : "Submit Registration"}
+                {submitting ? "Submitting…" : "Submit Registration"}
               </button>
             </form>
           )}
 
           {submitMsg && (
-            <div className="mt-3 text-sm text-slate-700">{submitMsg}</div>
+            <div className="mt-3 text-sm text-slate-700 break-words">{submitMsg}</div>
           )}
         </div>
       )}
