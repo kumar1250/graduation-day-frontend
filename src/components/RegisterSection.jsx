@@ -12,6 +12,8 @@ const DETAIL_ROWS = [
   ["Email", "email"],
 ];
 
+const MAX_PERSONS = 2;
+
 function emptyPerson() {
   return { name: "", contact: "", relation: "" };
 }
@@ -48,7 +50,11 @@ export default function RegisterSection({ onRegistered }) {
     );
   };
 
-  const addPerson = () => setPersons((prev) => [...prev, emptyPerson()]);
+  const addPerson = () =>
+    setPersons((prev) =>
+      prev.length < MAX_PERSONS ? [...prev, emptyPerson()] : prev
+    );
+
   const removePerson = (idx) =>
     setPersons((prev) => prev.filter((_, i) => i !== idx));
 
@@ -217,13 +223,15 @@ export default function RegisterSection({ onRegistered }) {
                     </div>
                   ))}
 
-                  <button
-                    type="button"
-                    onClick={addPerson}
-                    className="text-sm text-slate-600 hover:text-slate-900 font-medium"
-                  >
-                    + Add another person
-                  </button>
+                  {persons.length < MAX_PERSONS && (
+                    <button
+                      type="button"
+                      onClick={addPerson}
+                      className="text-sm text-slate-600 hover:text-slate-900 font-medium"
+                    >
+                      + Add another person
+                    </button>
+                  )}
                 </div>
               )}
 

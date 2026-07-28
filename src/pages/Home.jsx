@@ -220,7 +220,7 @@ export default function Home() {
                 Bonam Venkata Chalamayya Engineering College Odalarevu
               </p>
               <p className="text-ink-100/60 text-[11px] sm:text-xs mt-1.5 tracking-wide px-2">
-                Amalapuram &middot; Odalarevu &middot; Rajahmundry — Since 1997
+                Odalarevu &middot; — Since 1997
               </p>
             </div>
 
@@ -440,7 +440,7 @@ export default function Home() {
                 Bonam Venkata Chalamayya Engineering College Odalarevu
               </p>
               <p className="text-xs mt-0.5">
-                Amalapuram &middot; Odalarevu &middot; Rajahmundry
+                Odalarevu &middot;
               </p>
             </div>
           </div>
