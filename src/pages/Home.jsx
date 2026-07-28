@@ -8,9 +8,9 @@ import AcknowledgementSection from "../components/AcknowledgementSection";
 // looks finished today. Swap any of them for a real campus/ceremony photo
 // whenever you have one — just point the import at a .jpg/.png instead.
 import galleryCampus from "../assets/gallery-campus.jpg";
-import galleryStage from "../assets/gallery-stage.svg";
-import galleryCap from "../assets/gallery-cap.svg";
-import galleryFriends from "../assets/gallery-friends.svg";
+import galleryStage from "../assets/gallery-stage.jpeg";
+import galleryCap from "../assets/gallery-cap.jpeg";
+import galleryFriends from "../assets/gallery-friends.jpeg";
 
 const DETAILS = [
   {
