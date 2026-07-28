@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", "Georgia", serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Cormorant Garamond", serif;
+
+  --color-ink-950: #0a1a33;
+  --color-ink-900: #0e2144;
+  --color-ink-800: #163162;
+  --color-ink-700: #1e3f7a;
+  --color-ink-600: #2a4f96;
+
+  --color-brass-300: #ecd9a0;
+  --color-brass-400: #dcbb63;
+  --color-brass-500: #c9a227;
+  --color-brass-600: #a9821a;
+
+  --color-parchment-50: #fdfbf5;
+  --color-parchment-100: #faf5e7;
+  --color-parchment-200: #f3e9cd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Fine engraved rule, used to echo certificate borders across the site */
+.rule-brass {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-brass-400) 20%,
+    var(--color-brass-500) 50%,
+    var(--color-brass-400) 80%,
+    transparent
+  );
+}
+
+/* Subtle certificate-paper texture for the acknowledgement */
+.paper-texture {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(10, 26, 51, 0.045) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+
+@media print {
+  body {
+    background: white !important;
+  }
+}
