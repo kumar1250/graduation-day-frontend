@@ -6,8 +6,13 @@ import Acknowledgement from "./Acknowledgement";
 const DESIGN_WIDTH = 800; // matches the fixed width inside Acknowledgement.jsx
 
 export default function AcknowledgementSection({ student, onRegisterAnother }) {
-  const ref = useRef(null); // the actual 800px Acknowledgement node — this is what gets captured
-  const wrapperRef = useRef(null); // the responsive box that visually scales it to fit the screen
+  // Two separate instances, on purpose:
+  // - captureRef: hidden, full-size, NEVER transformed — this is what html2canvas reads
+  // - previewRef: the visible one, shown scaled to fit the screen
+  const captureRef = useRef(null);
+  const previewRef = useRef(null);
+  const wrapperRef = useRef(null);
+
   const [scale, setScale] = useState(1);
   const [scaledHeight, setScaledHeight] = useState(null);
   const [downloading, setDownloading] = useState(false);
@@ -16,18 +21,18 @@ export default function AcknowledgementSection({ student, onRegisterAnother }) {
   // Recompute the visual scale whenever the wrapper's width changes (resize, orientation, etc.)
   useLayoutEffect(() => {
     const recalc = () => {
-      if (!wrapperRef.current || !ref.current) return;
+      if (!wrapperRef.current || !previewRef.current) return;
       const containerWidth = wrapperRef.current.offsetWidth;
       const nextScale = Math.min(1, containerWidth / DESIGN_WIDTH);
       setScale(nextScale);
-      setScaledHeight(ref.current.offsetHeight * nextScale);
+      setScaledHeight(previewRef.current.offsetHeight * nextScale);
     };
 
     recalc();
 
     const resizeObserver = new ResizeObserver(recalc);
     if (wrapperRef.current) resizeObserver.observe(wrapperRef.current);
-    if (ref.current) resizeObserver.observe(ref.current);
+    if (previewRef.current) resizeObserver.observe(previewRef.current);
     window.addEventListener("resize", recalc);
 
     return () => {
@@ -36,28 +41,64 @@ export default function AcknowledgementSection({ student, onRegisterAnother }) {
     };
   }, [student]);
 
+  // Reliable cross-browser download: works on desktop and on mobile
+  // browsers (including in-app browsers) where jsPDF's own .save() can
+  // silently fail or just open a blank tab instead of downloading.
+  const triggerDownload = (blob, filename) => {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  };
+
   const handleDownload = async () => {
     setDownloading(true);
     setError("");
-    const node = ref.current;
-    const previousTransform = node.style.transform;
     try {
-      // Temporarily remove the visual scale so html2canvas always captures
-      // the full-size, undistorted layout — regardless of screen size.
-      node.style.transform = "none";
-      const canvas = await html2canvas(node, { scale: 2 });
+      // Custom fonts loading late is a common cause of misaligned/ghosted
+      // text in html2canvas snapshots — wait for them first.
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
+      const node = captureRef.current;
+      const canvas = await html2canvas(node, {
+        scale: 2, // sharp output for print
+        useCORS: true,
+        backgroundColor: "#ffffff",
+      });
+
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "pt", "a4");
+
+      // Fit the image inside the page (contain + center) so it can never
+      // get cut off, regardless of the certificate's exact height.
       const pageWidth = pdf.internal.pageSize.getWidth();
-      const imgWidth = pageWidth - 40;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 20, 20, imgWidth, imgHeight);
-      pdf.save(`Graduation_Acknowledgement_${student.roll_no}.pdf`);
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 24;
+      const maxWidth = pageWidth - margin * 2;
+      const maxHeight = pageHeight - margin * 2;
+      const ratio = Math.min(maxWidth / canvas.width, maxHeight / canvas.height);
+      const imgWidth = canvas.width * ratio;
+      const imgHeight = canvas.height * ratio;
+      const x = (pageWidth - imgWidth) / 2;
+      const y = margin;
+
+      pdf.setProperties({
+        title: `Graduation Acknowledgement - ${student.roll_no}`,
+      });
+      pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+
+      const filename = `Graduation_Acknowledgement_${student.roll_no}.pdf`;
+      triggerDownload(pdf.output("blob"), filename);
     } catch (err) {
       console.error("PDF generation failed:", err);
       setError("Could not generate the PDF. Please try again.");
     } finally {
-      node.style.transform = previousTransform;
       setDownloading(false);
     }
   };
@@ -88,7 +129,8 @@ export default function AcknowledgementSection({ student, onRegisterAnother }) {
         </p>
       </div>
 
-      {/* Responsive viewer: scales the fixed-size certificate to fit any screen */}
+      {/* Responsive viewer: scales the fixed-size certificate to fit any screen.
+          This copy is for DISPLAY ONLY — it is never captured for the PDF. */}
       <div
         ref={wrapperRef}
         className="mx-auto rounded-xl shadow-[0_24px_60px_-24px_rgba(14,33,68,0.4)] overflow-hidden"
@@ -101,8 +143,24 @@ export default function AcknowledgementSection({ student, onRegisterAnother }) {
             transformOrigin: "top left",
           }}
         >
-          <Acknowledgement ref={ref} student={student} />
+          <Acknowledgement ref={previewRef} student={student} />
         </div>
+      </div>
+
+      {/* Hidden, untransformed, always full-size copy — the ONLY thing
+          html2canvas ever reads, so the PDF is byte-for-byte identical
+          whether it's generated from a phone or a desktop. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: "-10000px",
+          width: `${DESIGN_WIDTH}px`,
+          pointerEvents: "none",
+        }}
+      >
+        <Acknowledgement ref={captureRef} student={student} />
       </div>
 
       {error && (
