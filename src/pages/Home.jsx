@@ -216,11 +216,11 @@ export default function Home() {
             />
 
             <div className={heroStep(120)} style={heroStyle(120)}>
-              <p className="font-body uppercase tracking-[0.25em] sm:tracking-[0.35em] text-brass-400 text-[11px] sm:text-xs md:text-sm px-2">
-                Bonam Venkata Chalamayya Engineering College Odalarevu
+              <p className="font-display font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-brass-400 text-xl sm:text-2xl md:text-3xl px-2">
+                Bonam Venkata Chalamayya Engineering College , Odalarevu
               </p>
-              <p className="text-ink-100/60 text-[11px] sm:text-xs mt-1.5 tracking-wide px-2">
-                Odalarevu &middot; — Since 1997
+              <p className="text-ink-100/70 text-xs sm:text-sm mt-2 tracking-wide px-2">
+                Odalarevu — Since 1997
               </p>
             </div>
 
@@ -440,7 +440,7 @@ export default function Home() {
                 Bonam Venkata Chalamayya Engineering College Odalarevu
               </p>
               <p className="text-xs mt-0.5">
-                Odalarevu &middot;
+                B.V.C. Engineering College, Odalarevu Beach Road, Odalarevu – 533210, Allavaram Mandal, Dr. B.R. Ambedkar Konaseema District (formerly East Godavari), Andhra Pradesh, India
               </p>
             </div>
           </div>

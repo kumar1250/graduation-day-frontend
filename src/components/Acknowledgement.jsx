@@ -35,10 +35,10 @@ const Acknowledgement = forwardRef(function Acknowledgement({ student }, ref) {
             />
             <div>
               <h1 className="font-display text-lg font-bold text-ink-950 leading-tight tracking-tight">
-                Bonam Venkata Chalamayya Engineering College Odalarevu
+                Bonam Venkata Chalamayya Engineering College , Odalarevu
               </h1>
               <p className="text-[11px] text-ink-900/55 tracking-wide mt-0.5">
-                Amalapuram &middot; Odalarevu &middot; Rajahmundry — Since 1997
+                B.V.C. Engineering College, Odalarevu Beach Road, Odalarevu – 533210, Allavaram Mandal, Dr. B.R. Ambedkar Konaseema District (formerly East Godavari), Andhra Pradesh, India — Since 1997
               </p>
             </div>
             <div className="ml-auto shrink-0 w-16 h-16 rounded-full border-2 border-brass-500 flex flex-col items-center justify-center text-center leading-none">
@@ -176,7 +176,7 @@ const Acknowledgement = forwardRef(function Acknowledgement({ student }, ref) {
                 Congratulations, and welcome to the alumni family.
               </p>
               <p className="text-[11px] text-ink-900/45 mt-1">
-                Graduation Day Office &middot; BVCE College &middot; Amalapuram &middot; Odalarevu
+                Graduation Day Office &middot; BVCE College &middot; B.V.C. Engineering College, Odalarevu Beach Road, Odalarevu – 533210, Allavaram Mandal, Dr. B.R. Ambedkar Konaseema District (formerly East Godavari), Andhra Pradesh, India
               </p>
             </div>
             <div className="text-center shrink-0">
